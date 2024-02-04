@@ -1,4 +1,4 @@
-package br.com.dcarv.criticalchallenge.ui.theme
+package br.com.dcarv.criticalchallenge.common.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
