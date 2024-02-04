@@ -1,9 +1,13 @@
 [versions]
 androidPlugin = "8.2.2"
 kotlinAndroid = "1.9.0"
+hilt = "2.50"
 
 [libraries]
+dagger-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+dagger-hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
 
 [plugins]
 android = { id = "com.android.application", version.ref = "androidPlugin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinAndroid" }
+dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
