@@ -2,10 +2,12 @@
 androidPlugin = "8.2.2"
 kotlinAndroid = "1.9.0"
 hilt = "2.50"
+lifecycle = "2.7.0"
 
 [libraries]
 dagger-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 dagger-hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
+lifecycle-viewModelCompose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
 
 [plugins]
 android = { id = "com.android.application", version.ref = "androidPlugin" }
