@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Critical Challenge</string>
+    <string name="source_bbc_news_label">BBC News</string>
+    <string name="source_bbc_news_id">bbc-news</string>
 </resources>

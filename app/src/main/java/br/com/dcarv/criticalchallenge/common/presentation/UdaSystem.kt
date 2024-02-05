@@ -3,8 +3,8 @@ package br.com.dcarv.criticalchallenge.common.presentation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.ViewModel
+import br.com.dcarv.criticalchallenge.common.coroutines.DispatchersProvider
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -22,7 +22,7 @@ class UdaChain<Message : Any, ViewState : Any, ViewEvent : Any>(
 ) {
 
     private val job = Job()
-    private val scope = CoroutineScope(job + Dispatchers.Main)
+    private val scope = CoroutineScope(job + DispatchersProvider.Main)
 
     private val messagesFlow = MutableSharedFlow<Message>()
     private val eventsFlow = MutableSharedFlow<ViewEvent>()
