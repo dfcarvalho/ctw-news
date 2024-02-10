@@ -3,6 +3,7 @@ package br.com.dcarv.criticalchallenge
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.test.espresso.IdlingRegistry
+import br.com.dcarv.criticalchallenge.test.CoilTestRule
 import br.com.dcarv.criticalchallenge.test.IdlingDispatchersTestRule
 import br.com.dcarv.criticalchallenge.test.MockedApiTestRule
 import br.com.dcarv.criticalchallenge.test.OkHttp3IdlingResource
@@ -29,6 +30,8 @@ class MainActivityTest {
     val scenarioRule = lazyActivityScenarioRule<MainActivity>(launchActivity = false)
     @get:Rule(order = 5)
     val composeTestRule = createEmptyComposeRule()
+    @get:Rule(order = 6)
+    val coilTestRule = CoilTestRule()
 
     @Inject
     lateinit var okHttpClient: OkHttpClient

@@ -5,4 +5,5 @@ import java.time.LocalDateTime
 data class Headline(
     val title: String,
     val date: LocalDateTime,
+    val imageUrl: String? = null,
 )

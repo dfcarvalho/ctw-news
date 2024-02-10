@@ -11,6 +11,7 @@ data class HeadlinesResponse(
     data class Article(
         val title: String,
         val publishedAt: LocalDateTime,
+        val urlToImage: String?,
     )
 }
 

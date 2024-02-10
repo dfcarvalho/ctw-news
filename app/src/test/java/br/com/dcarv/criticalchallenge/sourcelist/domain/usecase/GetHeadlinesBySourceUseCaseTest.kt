@@ -27,14 +27,26 @@ class GetHeadlinesBySourceUseCaseTest {
                 HeadlinesResponse.Article(
                     title = "title",
                     publishedAt = articleTime,
-                )
+                    urlToImage = "url",
+                ),
+                HeadlinesResponse.Article(
+                    title = "title",
+                    publishedAt = articleTime,
+                    urlToImage = null,
+                ),
             )
         )
         val expectedResult = listOf(
             Headline(
                 title = "title",
                 date = articleTime,
-            )
+                imageUrl = "url",
+            ),
+            Headline(
+                title = "title",
+                date = articleTime,
+                imageUrl = null,
+            ),
         )
         coEvery { newsApiService.getBySource(source = source) } returns response
 
