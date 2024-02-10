@@ -8,6 +8,7 @@ import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
+import java.time.LocalDateTime
 
 class GetHeadlinesBySourceUseCaseTest {
 
@@ -18,18 +19,21 @@ class GetHeadlinesBySourceUseCaseTest {
     @Test
     fun `when when executed with success, should call service and map response to domain model`() = runTest {
         val source = "source"
+        val articleTime = LocalDateTime.now()
         val response = HeadlinesResponse(
             status = "ok",
             totalResults = 1,
             articles = listOf(
                 HeadlinesResponse.Article(
                     title = "title",
+                    publishedAt = articleTime,
                 )
             )
         )
         val expectedResult = listOf(
             Headline(
                 title = "title",
+                date = articleTime,
             )
         )
         coEvery { newsApiService.getBySource(source = source) } returns response

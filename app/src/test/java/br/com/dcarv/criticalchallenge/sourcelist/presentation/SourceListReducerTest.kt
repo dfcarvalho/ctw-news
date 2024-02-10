@@ -2,6 +2,7 @@ package br.com.dcarv.criticalchallenge.sourcelist.presentation
 
 import br.com.dcarv.criticalchallenge.sourcelist.domain.model.Headline
 import org.junit.Test
+import java.time.LocalDateTime
 
 class SourceListReducerTest {
 
@@ -31,7 +32,7 @@ class SourceListReducerTest {
 
     @Test
     fun `when message is ShowHeadlines, should set headlines and loading to false`() {
-        val headline = Headline("title")
+        val headline = Headline(title = "title", date = LocalDateTime.now())
         val currentState = SourceListViewState(headlines = emptyList(), isLoading = true)
         val message = SourceListMessage.ShowHeadlines(listOf(headline))
         val expectedState = SourceListViewState(headlines = listOf(headline), isLoading = false)

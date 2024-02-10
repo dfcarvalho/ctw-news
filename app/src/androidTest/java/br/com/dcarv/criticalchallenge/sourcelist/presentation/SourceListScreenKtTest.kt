@@ -7,6 +7,7 @@ import br.com.dcarv.criticalchallenge.common.theme.CriticalChallengeTheme
 import br.com.dcarv.criticalchallenge.sourcelist.domain.model.Headline
 import org.junit.Rule
 import org.junit.Test
+import java.time.LocalDateTime
 
 private const val HEADLINE_1 = "title 1"
 private const val HEADLINE_2 = "title 2"
@@ -35,12 +36,15 @@ class SourceListScreenKtTest {
             headlines = listOf(
                 Headline(
                     title = HEADLINE_1,
+                    date = LocalDateTime.now(),
                 ),
                 Headline(
                     title = HEADLINE_2,
+                    date = LocalDateTime.now(),
                 ),
                 Headline(
                     title = HEADLINE_3,
+                    date = LocalDateTime.now(),
                 ),
             )
         )

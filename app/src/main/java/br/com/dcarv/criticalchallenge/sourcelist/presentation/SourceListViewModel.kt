@@ -40,6 +40,8 @@ class SourceListViewModel @Inject constructor(
             getHeadlinesBySource(stringResourceProvider.get(R.string.source_bbc_news_id))
         }.await()
 
-        submitMessage(SourceListMessage.ShowHeadlines(headlines))
+        val orderedHeadlines = headlines.sortedByDescending { it.date }
+
+        submitMessage(SourceListMessage.ShowHeadlines(orderedHeadlines))
     }
 }

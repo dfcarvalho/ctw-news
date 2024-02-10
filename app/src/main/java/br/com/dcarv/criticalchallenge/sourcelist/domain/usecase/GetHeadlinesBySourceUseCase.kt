@@ -18,8 +18,11 @@ class GetHeadlinesBySourceUseCase @Inject constructor(
     }
 }
 
-fun HeadlinesResponse.toHeadlineModel(): List<Headline> {
+private fun HeadlinesResponse.toHeadlineModel(): List<Headline> {
     return articles.map { articleResponse ->
-        Headline(title = articleResponse.title)
+        Headline(
+            title = articleResponse.title,
+            date = articleResponse.publishedAt,
+        )
     }
 }

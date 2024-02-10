@@ -2,8 +2,8 @@ package br.com.dcarv.criticalchallenge.sourcelist.presentation
 
 import br.com.dcarv.criticalchallenge.R
 import br.com.dcarv.criticalchallenge.common.presentation.StringResourceProvider
-import br.com.dcarv.criticalchallenge.sourcelist.domain.model.Headline
 import br.com.dcarv.criticalchallenge.sourcelist.domain.usecase.GetHeadlinesBySourceUseCase
+import br.com.dcarv.criticalchallenge.utils.HeadlineObjectProvider
 import br.com.dcarv.criticalchallenge.utils.MainDispatcherRule
 import io.mockk.Ordering
 import io.mockk.coEvery
@@ -36,17 +36,17 @@ class SourceListViewModelTest {
     )
 
     @Test
-    fun `when initialize, should set source name and show headlines`() = runTest {
-        val headline = Headline("title")
-        val headlines = listOf(headline)
-        coEvery { getHeadlinesBySourceUseCase(SOURCE_ID) } returns headlines
+    fun `when initialize, should set source name and show headlines ordered by date`() = runTest {
+        val unorderedHeadlines = HeadlineObjectProvider.getUnorderedHeadlinesList()
+        coEvery { getHeadlinesBySourceUseCase(SOURCE_ID) } returns unorderedHeadlines
+        val orderedHeadlines = HeadlineObjectProvider.getOrderedHeadlinesList()
 
         viewModel.initialize()
 
         coVerify(ordering = Ordering.SEQUENCE) {
             udaChain.submitMessage(SourceListMessage.SetSourceName(SOURCE_LABEL))
             getHeadlinesBySourceUseCase(SOURCE_ID)
-            udaChain.submitMessage(SourceListMessage.ShowHeadlines(headlines))
+            udaChain.submitMessage(SourceListMessage.ShowHeadlines(orderedHeadlines))
         }
     }
 }

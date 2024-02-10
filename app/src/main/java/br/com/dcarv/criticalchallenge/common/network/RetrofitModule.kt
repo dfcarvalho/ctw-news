@@ -1,5 +1,6 @@
 package br.com.dcarv.criticalchallenge.common.network
 
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,16 +22,23 @@ class RetrofitModule {
 
     @Provides
     @Singleton
+    fun provideMoshi(): Moshi {
+        return Moshi.Builder()
+            .add(LocalDateTimeJsonAdapter())
+            .build()
+    }
+
+    @Provides
+    @Singleton
     fun provideRetrofitClient(
         okHttpClient: OkHttpClient,
+        moshi: Moshi,
         @NewsApiServiceUrl newsApiServiceUrl: String
     ): Retrofit {
-        val moshiConverterFactory = MoshiConverterFactory.create()
-
         return Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(newsApiServiceUrl)
-            .addConverterFactory(moshiConverterFactory)
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
     }
 }

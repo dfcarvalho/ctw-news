@@ -25,6 +25,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import br.com.dcarv.criticalchallenge.common.compose.InitializeOnce
 import br.com.dcarv.criticalchallenge.common.theme.CriticalChallengeTheme
 import br.com.dcarv.criticalchallenge.sourcelist.domain.model.Headline
+import java.time.LocalDateTime
 
 @Composable
 fun SourceListScreen(
@@ -132,9 +133,18 @@ fun SourceListScreenPreview() {
                 isLoading = false,
                 sourceName = "BBC News",
                 headlines = listOf(
-                    Headline(title = "Essex dog attack: Grandmother killed by XL bully dogs, family says - BBC"),
-                    Headline(title = "US declines to rule out hitting targets in Iran, Jake Sullivan says - POLITICO"),
-                    Headline(title = "Facebook Turns 20: From Mark Zuckerberg's Harvard Dorm Room to the Metaverse - The Wall Street Journal"),
+                    Headline(
+                        title = "Essex dog attack: Grandmother killed by XL bully dogs, family says - BBC",
+                        date = LocalDateTime.now(),
+                    ),
+                    Headline(
+                        title = "US declines to rule out hitting targets in Iran, Jake Sullivan says - POLITICO",
+                        date = LocalDateTime.now(),
+                    ),
+                    Headline(
+                        title = "Facebook Turns 20: From Mark Zuckerberg's Harvard Dorm Room to the Metaverse - The Wall Street Journal",
+                        date = LocalDateTime.now(),
+                    ),
                 )
             )
         )
