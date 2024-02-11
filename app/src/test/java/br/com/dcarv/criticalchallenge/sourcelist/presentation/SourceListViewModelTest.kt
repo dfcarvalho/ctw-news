@@ -49,4 +49,13 @@ class SourceListViewModelTest {
             udaChain.submitMessage(SourceListMessage.ShowHeadlines(orderedHeadlines))
         }
     }
+
+    @Test
+    fun `when headline clicked, should submit event to open headline`() = runTest {
+        val headline = HeadlineObjectProvider.getHeadline()
+
+        viewModel.onHeadlineClick(headline)
+
+        coVerify { udaChain.submitEvent(SourceListViewEvent.OpenHeadline(headline)) }
+    }
 }

@@ -28,11 +28,13 @@ class GetHeadlinesBySourceUseCaseTest {
                     title = "title",
                     publishedAt = articleTime,
                     urlToImage = "url",
+                    content = "content",
                 ),
                 HeadlinesResponse.Article(
                     title = "title",
                     publishedAt = articleTime,
                     urlToImage = null,
+                    content = "content",
                 ),
             )
         )
@@ -41,11 +43,13 @@ class GetHeadlinesBySourceUseCaseTest {
                 title = "title",
                 date = articleTime,
                 imageUrl = "url",
+                content = "content",
             ),
             Headline(
                 title = "title",
                 date = articleTime,
                 imageUrl = null,
+                content = "content",
             ),
         )
         coEvery { newsApiService.getBySource(source = source) } returns response

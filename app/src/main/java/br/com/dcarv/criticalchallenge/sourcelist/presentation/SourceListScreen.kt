@@ -1,5 +1,6 @@
 package br.com.dcarv.criticalchallenge.sourcelist.presentation
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,8 +25,9 @@ import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import br.com.dcarv.criticalchallenge.common.compose.InitializeOnce
+import br.com.dcarv.criticalchallenge.common.compose.ObserveEvents
 import br.com.dcarv.criticalchallenge.common.theme.CriticalChallengeTheme
 import br.com.dcarv.criticalchallenge.sourcelist.domain.model.Headline
 import coil.compose.AsyncImage
@@ -34,15 +36,23 @@ import java.time.LocalDateTime
 @Composable
 fun SourceListScreen(
     modifier: Modifier = Modifier,
-    sourceListViewModel: SourceListViewModel = viewModel<SourceListViewModel>()
+    sourceListViewModel: SourceListViewModel = hiltViewModel<SourceListViewModel>(),
+    onNavigationToHeadline: (Headline) -> Unit = {},
 ) {
     InitializeOnce {
         sourceListViewModel.initialize()
     }
 
+    ObserveEvents(sourceListViewModel.events()) {
+        when (it) {
+            is SourceListViewEvent.OpenHeadline -> onNavigationToHeadline(it.headline)
+        }
+    }
+
     SourceListScreen(
         state = sourceListViewModel.state().value,
         modifier = modifier,
+        onHeadlineClick = sourceListViewModel::onHeadlineClick,
     )
 }
 
@@ -51,6 +61,7 @@ fun SourceListScreen(
 internal fun SourceListScreen(
     state: SourceListViewState,
     modifier: Modifier = Modifier,
+    onHeadlineClick: (Headline) -> Unit = {},
 ) {
     Scaffold(
         topBar = {
@@ -65,7 +76,11 @@ internal fun SourceListScreen(
         if (state.isLoading) {
             LoadingState(contentModifier)
         } else {
-            SourceListContent(state = state, modifier = contentModifier)
+            SourceListContent(
+                state = state,
+                modifier = contentModifier,
+                onHeadlineClick = onHeadlineClick,
+            )
         }
     }
 }
@@ -87,22 +102,29 @@ private fun LoadingState(modifier: Modifier = Modifier) {
 private fun SourceListContent(
     state: SourceListViewState,
     modifier: Modifier = Modifier,
+    onHeadlineClick: (Headline) -> Unit = {},
 ) {
     Column(
         modifier = modifier,
     ) {
-        NewsList(state.headlines)
+        NewsList(
+            news = state.headlines,
+            onHeadlineClick = onHeadlineClick,
+        )
     }
 }
 
 @Composable
-private fun NewsList(news: List<Headline>) {
+private fun NewsList(
+    news: List<Headline>,
+    onHeadlineClick: (Headline) -> Unit = {},
+) {
     LazyColumn(
         contentPadding = PaddingValues(all = 16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(news) { headline ->
-            HeadlineContent(headline)
+            HeadlineContent(headline, onClick = { onHeadlineClick(headline) })
         }
     }
 }
@@ -111,9 +133,12 @@ private fun NewsList(news: List<Headline>) {
 private fun HeadlineContent(
     headline: Headline,
     modifier: Modifier = Modifier,
+    onClick: () -> Unit = {},
 ) {
     Card(
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable { onClick() }
     ) {
         Column {
             AsyncImage(

@@ -2,6 +2,7 @@ package br.com.dcarv.criticalchallenge
 
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
 import androidx.test.espresso.IdlingRegistry
 import br.com.dcarv.criticalchallenge.test.CoilTestRule
 import br.com.dcarv.criticalchallenge.test.IdlingDispatchersTestRule
@@ -43,6 +44,7 @@ class MainActivityTest {
         hiltRule.inject()
         okHttpIdlingResource = OkHttp3IdlingResource.create("OkHttp", okHttpClient)
         IdlingRegistry.getInstance().register(okHttpIdlingResource)
+        mockedApiTestRule.mockResponse(200, Preconditions.HEADLINES_RESPONSE)
     }
 
     @After
@@ -52,12 +54,20 @@ class MainActivityTest {
 
     @Test
     fun whenStartedShouldLoadAndShowHeadlines() {
-        mockedApiTestRule.mockResponse(200, Preconditions.HEADLINES_RESPONSE)
         scenarioRule.launch()
 
         composeTestRule.onNodeWithText(Expectations.firstHeadlineTitle).assertExists()
         composeTestRule.onNodeWithText(Expectations.secondHeadlineTitle).assertExists()
         composeTestRule.onNodeWithText(Expectations.thirdHeadlineTitle).assertExists()
+    }
+
+    @Test
+    fun whenHeadlineClickedShouldNavigateToDetails() {
+        scenarioRule.launch()
+
+        composeTestRule.onNodeWithText(Expectations.firstHeadlineTitle).performClick()
+        composeTestRule.onNodeWithText(Expectations.firstHeadlineTitle).assertExists()
+        composeTestRule.onNodeWithText(Expectations.firstHeadlineContent).assertExists()
     }
 
     object Preconditions {
@@ -114,6 +124,7 @@ class MainActivityTest {
     object Expectations {
 
         const val firstHeadlineTitle = "Nevada caucuses v primary: Why both Trump and Haley may claim victory"
+        const val firstHeadlineContent = "Against a backdrop of neon lights and the clink of casino chips, the Nevada caucuses were once a colourful and important stop in the race to become the presidential nominee.\r\nBut there are no such th… [+4079 chars]"
         const val secondHeadlineTitle = "The highs and lows of Grammys 2024 - and why Taylor Swift won album of year"
         const val thirdHeadlineTitle = "Drone attack kills six Kurdish-led fighters at US base in east Syria"
     }

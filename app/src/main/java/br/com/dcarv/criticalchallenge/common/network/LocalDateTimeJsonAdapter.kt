@@ -15,7 +15,6 @@ class LocalDateTimeJsonAdapter {
 
     @FromJson
     fun fromJson(value: String): LocalDateTime {
-        println("DFC - value: $value")
         return LocalDateTime.from(FORMATTER.parse(value))
     }
 

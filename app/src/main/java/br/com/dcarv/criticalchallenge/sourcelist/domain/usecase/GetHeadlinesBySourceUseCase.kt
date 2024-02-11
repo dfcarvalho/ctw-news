@@ -24,6 +24,7 @@ private fun HeadlinesResponse.toHeadlineModel(): List<Headline> {
             title = articleResponse.title,
             date = articleResponse.publishedAt,
             imageUrl = articleResponse.urlToImage,
+            content = articleResponse.content ?: ""
         )
     }
 }

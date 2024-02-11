@@ -24,6 +24,7 @@ sealed interface SourceListMessage {
 
 sealed interface SourceListViewEvent {
 
+    data class OpenHeadline(val headline: Headline) : SourceListViewEvent
 }
 
 @HiltViewModel
@@ -43,5 +44,9 @@ class SourceListViewModel @Inject constructor(
         val orderedHeadlines = headlines.sortedByDescending { it.date }
 
         submitMessage(SourceListMessage.ShowHeadlines(orderedHeadlines))
+    }
+
+    fun onHeadlineClick(headline: Headline) {
+        submitEvent(SourceListViewEvent.OpenHeadline(headline))
     }
 }

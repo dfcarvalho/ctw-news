@@ -13,7 +13,6 @@ object HeadlineObjectProvider {
     private val DATE_2 = BASE_DATE.minusHours(1)
     private val DATE_3 = BASE_DATE.minusDays(1)
 
-
     fun getUnorderedHeadlinesList() = listOf(
         Headline(title = HEADLINE_2, date = DATE_2),
         Headline(title = HEADLINE_3, date = DATE_3),
@@ -25,4 +24,6 @@ object HeadlineObjectProvider {
         Headline(title = HEADLINE_2, date = DATE_2),
         Headline(title = HEADLINE_3, date = DATE_3),
     )
+
+    fun getHeadline() = Headline(title = HEADLINE_1, date = DATE_1)
 }

@@ -66,6 +66,8 @@ dependencies {
     implementation(libs.retrofit.moshi)
     implementation(libs.okhttp)
     implementation(libs.coil)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.dagger.hilt.navigation.compose)
     testImplementation("junit:junit:4.13.2")
     testImplementation(libs.mockk.android)
     testImplementation(libs.mockk.agent)
