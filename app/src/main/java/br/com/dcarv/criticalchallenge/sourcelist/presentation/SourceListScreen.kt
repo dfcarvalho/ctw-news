@@ -161,7 +161,7 @@ fun SourceListScreenPreview() {
                         date = LocalDateTime.now(),
                     ),
                 )
-            )
+            ),
         )
     }
 }

@@ -43,7 +43,6 @@ fun HeadlineDetailsScreen(
     state: HeadlineDetailsViewState,
     modifier: Modifier = Modifier,
 ) {
-    println("DFC - composition - $state")
     if (!state.isLoading && state.headline != null) {
         HeadlineDetailsContent(state.headline, modifier)
     } else {

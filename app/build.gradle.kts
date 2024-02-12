@@ -28,6 +28,15 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
+    flavorDimensions += "source"
+    productFlavors {
+        create("bbc") {
+            dimension = "source"
+        }
+        create("globo") {
+            dimension = "source"
+        }
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8

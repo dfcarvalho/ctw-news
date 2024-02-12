@@ -35,10 +35,10 @@ class SourceListViewModel @Inject constructor(
 ) : UdaViewModel<SourceListMessage, SourceListViewState, SourceListViewEvent>(udaChain) {
 
     fun initialize() = viewModelScope.launch {
-        submitMessage(SourceListMessage.SetSourceName(stringResourceProvider.get(R.string.source_bbc_news_label)))
+        submitMessage(SourceListMessage.SetSourceName(stringResourceProvider.get(R.string.news_source_label)))
 
         val headlines = async(DispatchersProvider.IO) {
-            getHeadlinesBySource(stringResourceProvider.get(R.string.source_bbc_news_id))
+            getHeadlinesBySource(stringResourceProvider.get(R.string.news_source_id))
         }.await()
 
         val orderedHeadlines = headlines.sortedByDescending { it.date }

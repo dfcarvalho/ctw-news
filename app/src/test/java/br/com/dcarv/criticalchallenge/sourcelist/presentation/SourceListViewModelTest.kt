@@ -24,8 +24,8 @@ class SourceListViewModelTest {
 
     private val getHeadlinesBySourceUseCase: GetHeadlinesBySourceUseCase = mockk()
     private val stringResourceProvider: StringResourceProvider = mockk {
-        every { get(R.string.source_bbc_news_id) } returns SOURCE_ID
-        every { get(R.string.source_bbc_news_label) } returns SOURCE_LABEL
+        every { get(R.string.news_source_id) } returns SOURCE_ID
+        every { get(R.string.news_source_label) } returns SOURCE_LABEL
     }
     private val udaChain: SourceListUdaChain = mockk(relaxUnitFun = true)
 
