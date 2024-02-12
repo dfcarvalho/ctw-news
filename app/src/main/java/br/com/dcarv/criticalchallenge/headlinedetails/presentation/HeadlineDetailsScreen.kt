@@ -1,26 +1,23 @@
 package br.com.dcarv.criticalchallenge.headlinedetails.presentation
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.ColorPainter
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import br.com.dcarv.criticalchallenge.common.compose.InitializeOnce
+import br.com.dcarv.criticalchallenge.common.presentation.LoadingIndicator
 import br.com.dcarv.criticalchallenge.common.theme.CriticalChallengeTheme
 import br.com.dcarv.criticalchallenge.sourcelist.domain.model.Headline
-import br.com.dcarv.criticalchallenge.sourcelist.presentation.SourceListScreenTestTag
 import coil.compose.AsyncImage
 import java.time.LocalDateTime
 
@@ -50,7 +47,7 @@ fun HeadlineDetailsScreen(
     if (!state.isLoading && state.headline != null) {
         HeadlineDetailsContent(state.headline, modifier)
     } else {
-        LoadingState(modifier)
+        LoadingIndicator(modifier)
     }
 }
 
@@ -82,19 +79,6 @@ fun HeadlineDetailsContent(
                 style = MaterialTheme.typography.bodyMedium,
             )
         }
-    }
-}
-
-@Composable
-private fun LoadingState(modifier: Modifier = Modifier) {
-    Box(
-        modifier = modifier.fillMaxSize()
-    ) {
-        CircularProgressIndicator(
-            modifier = Modifier
-                .align(Alignment.Center)
-                .testTag(SourceListScreenTestTag.LOADING_INDICATOR)
-        )
     }
 }
 

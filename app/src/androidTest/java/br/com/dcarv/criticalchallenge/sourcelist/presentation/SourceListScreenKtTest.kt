@@ -3,6 +3,7 @@ package br.com.dcarv.criticalchallenge.sourcelist.presentation
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
+import br.com.dcarv.criticalchallenge.common.presentation.LoadingIndicatorTestTag
 import br.com.dcarv.criticalchallenge.common.theme.CriticalChallengeTheme
 import br.com.dcarv.criticalchallenge.sourcelist.domain.model.Headline
 import org.junit.Rule
@@ -23,7 +24,7 @@ class SourceListScreenKtTest {
         val state = SourceListViewState(isLoading = true)
         renderState(state)
 
-        composeTestRule.onNodeWithTag(SourceListScreenTestTag.LOADING_INDICATOR)
+        composeTestRule.onNodeWithTag(LoadingIndicatorTestTag.LOADING_INDICATOR)
             .assertExists()
     }
 
@@ -50,7 +51,7 @@ class SourceListScreenKtTest {
         )
         renderState(state)
 
-        composeTestRule.onNodeWithTag(SourceListScreenTestTag.LOADING_INDICATOR).assertDoesNotExist()
+        composeTestRule.onNodeWithTag(LoadingIndicatorTestTag.LOADING_INDICATOR).assertDoesNotExist()
         composeTestRule.onNodeWithText(sourceName).assertExists()
         composeTestRule.onNodeWithText(HEADLINE_1).assertExists()
         composeTestRule.onNodeWithText(HEADLINE_2).assertExists()
