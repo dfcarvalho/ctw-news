@@ -3,4 +3,6 @@
 
     <string name="auth_error">You must authenticate with Biometric to continue</string>
     <string name="auth_button_label">Authenticate</string>
+
+    <string name="details_no_selection">Select a headline to see more details…</string>
 </resources>

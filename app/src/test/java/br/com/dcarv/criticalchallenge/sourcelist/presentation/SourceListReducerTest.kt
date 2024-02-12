@@ -20,17 +20,6 @@ class SourceListReducerTest {
     }
 
     @Test
-    fun `when message is SetSourceName, should set source name`() {
-        val currentState = SourceListViewState(sourceName = "")
-        val message = SourceListMessage.SetSourceName("CNN")
-        val expectedState = SourceListViewState(sourceName = "CNN")
-
-        val result = reducer.apply(currentState, message)
-
-        assert(expectedState == result) { "Expected $expectedState but was $result" }
-    }
-
-    @Test
     fun `when message is ShowHeadlines, should set headlines and loading to false`() {
         val headline = Headline(title = "title", date = LocalDateTime.now())
         val currentState = SourceListViewState(headlines = emptyList(), isLoading = true)

@@ -20,7 +20,7 @@ class HeadlineDetailsViewModel @Inject constructor(
     udaChain: HeadlineDetailsUdaChain
 ): UdaViewModel<HeadlineDetailsMessage, HeadlineDetailsViewState, HeadlineDetailsViewEvent>(udaChain) {
 
-    fun initialize(headline: Headline) {
+    fun setHeadline(headline: Headline) {
         submitMessage(HeadlineDetailsMessage.SetHeadline(headline))
     }
 }

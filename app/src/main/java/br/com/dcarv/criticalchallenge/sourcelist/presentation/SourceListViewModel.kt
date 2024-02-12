@@ -18,7 +18,6 @@ typealias SourceListUdaChain = UdaChain<SourceListMessage, SourceListViewState, 
 sealed interface SourceListMessage {
 
     data object ShowLoading : SourceListMessage
-    data class SetSourceName(val sourceName: String) : SourceListMessage
     data class ShowHeadlines(val headlines: List<Headline>) : SourceListMessage
 }
 
@@ -35,7 +34,6 @@ class SourceListViewModel @Inject constructor(
 ) : UdaViewModel<SourceListMessage, SourceListViewState, SourceListViewEvent>(udaChain) {
 
     fun initialize() = viewModelScope.launch {
-        submitMessage(SourceListMessage.SetSourceName(stringResourceProvider.get(R.string.news_source_label)))
 
         val headlines = async(DispatchersProvider.IO) {
             getHeadlinesBySource(stringResourceProvider.get(R.string.news_source_id))

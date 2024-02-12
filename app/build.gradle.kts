@@ -78,6 +78,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.dagger.hilt.navigation.compose)
     implementation(libs.androidx.biometric)
+    implementation(libs.androidx.windowSizeClass)
     testImplementation("junit:junit:4.13.2")
     testImplementation(libs.mockk.android)
     testImplementation(libs.mockk.agent)

@@ -30,10 +30,8 @@ class SourceListScreenKtTest {
 
     @Test
     fun whenInLoadedStateShouldShowContent() {
-        val sourceName = "BBC News"
         val state = SourceListViewState(
             isLoading = false,
-            sourceName = sourceName,
             headlines = listOf(
                 Headline(
                     title = HEADLINE_1,
@@ -52,7 +50,6 @@ class SourceListScreenKtTest {
         renderState(state)
 
         composeTestRule.onNodeWithTag(LoadingIndicatorTestTag.LOADING_INDICATOR).assertDoesNotExist()
-        composeTestRule.onNodeWithText(sourceName).assertExists()
         composeTestRule.onNodeWithText(HEADLINE_1).assertExists()
         composeTestRule.onNodeWithText(HEADLINE_2).assertExists()
         composeTestRule.onNodeWithText(HEADLINE_3).assertExists()

@@ -10,10 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -53,32 +50,20 @@ fun SourceListScreen(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun SourceListScreen(
     state: SourceListViewState,
     modifier: Modifier = Modifier,
     onHeadlineClick: (Headline) -> Unit = {},
 ) {
-    Scaffold(
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text(text = state.sourceName) },
-            )
-        },
-        modifier = modifier,
-    ) { padding ->
-        val contentModifier = modifier.padding(padding)
-
-        if (state.isLoading) {
-            LoadingIndicator(contentModifier)
-        } else {
-            SourceListContent(
-                state = state,
-                modifier = contentModifier,
-                onHeadlineClick = onHeadlineClick,
-            )
-        }
+    if (state.isLoading) {
+        LoadingIndicator(modifier)
+    } else {
+        SourceListContent(
+            state = state,
+            modifier = modifier,
+            onHeadlineClick = onHeadlineClick,
+        )
     }
 }
 
@@ -139,14 +124,13 @@ private fun HeadlineContent(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, apiLevel = 33)
 @Composable
 fun SourceListScreenPreview() {
     CriticalChallengeTheme {
         SourceListScreen(
             state = SourceListViewState(
                 isLoading = false,
-                sourceName = "BBC News",
                 headlines = listOf(
                     Headline(
                         title = "Essex dog attack: Grandmother killed by XL bully dogs, family says - BBC",

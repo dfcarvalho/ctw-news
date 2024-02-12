@@ -15,7 +15,6 @@ import org.junit.Rule
 import org.junit.Test
 
 private const val SOURCE_ID = "source_id"
-private const val SOURCE_LABEL = "source label"
 
 class SourceListViewModelTest {
 
@@ -25,7 +24,6 @@ class SourceListViewModelTest {
     private val getHeadlinesBySourceUseCase: GetHeadlinesBySourceUseCase = mockk()
     private val stringResourceProvider: StringResourceProvider = mockk {
         every { get(R.string.news_source_id) } returns SOURCE_ID
-        every { get(R.string.news_source_label) } returns SOURCE_LABEL
     }
     private val udaChain: SourceListUdaChain = mockk(relaxUnitFun = true)
 
@@ -44,7 +42,7 @@ class SourceListViewModelTest {
         viewModel.initialize()
 
         coVerify(ordering = Ordering.SEQUENCE) {
-            udaChain.submitMessage(SourceListMessage.SetSourceName(SOURCE_LABEL))
+
             getHeadlinesBySourceUseCase(SOURCE_ID)
             udaChain.submitMessage(SourceListMessage.ShowHeadlines(orderedHeadlines))
         }

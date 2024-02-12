@@ -10,6 +10,7 @@ coil = "2.5.0"
 navigation = "2.7.7"
 hiltNavigationCompose = "1.1.0"
 biometric = "1.1.0"
+androidXWindowSizeClass = "1.2.0"
 
 # Testing
 mockk = "1.13.9"
@@ -28,6 +29,7 @@ okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
 androidx-biometric = { module = "androidx.biometric:biometric", version.ref = "biometric" }
+androidx-windowSizeClass = { module = "androidx.compose.material3:material3-window-size-class-android", version.ref = "androidXWindowSizeClass" }
 
 # Testing
 mockk-android = { module = "io.mockk:mockk-android", version.ref = "mockk" }

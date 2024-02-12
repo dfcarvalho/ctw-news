@@ -8,13 +8,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import br.com.dcarv.criticalchallenge.common.compose.InitializeOnce
 import br.com.dcarv.criticalchallenge.common.presentation.LoadingIndicator
 import br.com.dcarv.criticalchallenge.common.theme.CriticalChallengeTheme
 import br.com.dcarv.criticalchallenge.sourcelist.domain.model.Headline
@@ -28,8 +28,8 @@ fun HeadlineDetailsScreen(
     headlineDetailsViewModel: HeadlineDetailsViewModel = hiltViewModel<HeadlineDetailsViewModel>(),
 ) {
 
-    InitializeOnce {
-        headlineDetailsViewModel.initialize(headline)
+    LaunchedEffect(headline) {
+        headlineDetailsViewModel.setHeadline(headline)
     }
 
     HeadlineDetailsScreen(
@@ -81,7 +81,7 @@ fun HeadlineDetailsContent(
     }
 }
 
-@Preview
+@Preview(apiLevel = 33)
 @Composable
 fun HeadlineDetailsScreenPreview() {
     val state = HeadlineDetailsViewState(

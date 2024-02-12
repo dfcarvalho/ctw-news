@@ -83,7 +83,7 @@ private fun AuthenticationError(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, apiLevel = 33)
 @Composable
 fun AuthenticationScreenPreviewError() {
     CriticalChallengeTheme {

@@ -15,7 +15,7 @@ class HeadlineDetailsViewModelTest {
     fun `when initialize, should set headline`() {
         val headline = HeadlineObjectProvider.getHeadline()
 
-        viewModel.initialize(headline)
+        viewModel.setHeadline(headline)
 
         verify {
             udaChain.submitMessage(HeadlineDetailsMessage.SetHeadline(headline))
