@@ -16,8 +16,12 @@ class RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
-        return OkHttpClient.Builder().build()
+    fun provideOkHttpClient(
+        authenticationInterceptor: AuthenticationInterceptor,
+    ): OkHttpClient {
+        return OkHttpClient.Builder()
+            .addInterceptor(authenticationInterceptor)
+            .build()
     }
 
     @Provides
