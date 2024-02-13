@@ -5,4 +5,7 @@
     <string name="auth_button_label">Authenticate</string>
 
     <string name="details_no_selection">Select a headline to see more details…</string>
+    <string name="auth_prompt_title">Biometric authentication</string>
+    <string name="auth_prompt_subtitle">Authenticate using your biometric credential</string>
+    <string name="auth_prompt_cancel">Cancel</string>
 </resources>

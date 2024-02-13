@@ -4,14 +4,17 @@ import android.util.Log
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
 import androidx.biometric.BiometricPrompt
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
+import br.com.dcarv.criticalchallenge.R
+import br.com.dcarv.criticalchallenge.common.presentation.StringResourceProvider
 import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 class AndroidBiometric @Inject constructor(
     private val biometricManager: BiometricManager,
+    private val biometricPromptFactory: BiometricPromptFactory,
+    private val stringResourceProvider: StringResourceProvider,
 ) {
 
     fun canAuthenticateWithFingerprint(): Boolean {
@@ -27,16 +30,12 @@ class AndroidBiometric @Inject constructor(
             onFailure =  { continuation.resume(false) },
         )
 
-        val biometricPrompt = BiometricPrompt(
-            activity,
-            ContextCompat.getMainExecutor(activity),
-            callback,
-        )
+        val biometricPrompt = biometricPromptFactory.create(activity, callback)
 
         val promptInfo = BiometricPrompt.PromptInfo.Builder()
-            .setTitle("Biometric authentication")
-            .setSubtitle("Authenticate using your biometric credential")
-            .setNegativeButtonText("Cancel")
+            .setTitle(stringResourceProvider.get(R.string.auth_prompt_title))
+            .setSubtitle(stringResourceProvider.get(R.string.auth_prompt_subtitle))
+            .setNegativeButtonText(stringResourceProvider.get(R.string.auth_prompt_cancel))
             .build()
 
         biometricPrompt.authenticate(promptInfo)

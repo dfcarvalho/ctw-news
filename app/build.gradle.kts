@@ -85,6 +85,7 @@ dependencies {
     testImplementation(libs.coroutines.core)
     testImplementation(libs.coroutines.test)
     testImplementation(libs.androidx.core.ktx)
+    testImplementation(libs.robolectric)
     androidTestImplementation(libs.junit.extensions)
     androidTestImplementation(libs.espresso)
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.08.00"))

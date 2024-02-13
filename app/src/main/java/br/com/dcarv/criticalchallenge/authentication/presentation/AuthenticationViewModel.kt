@@ -13,6 +13,7 @@ typealias AuthenticationUdaChain = UdaChain<AuthenticationMessage, Authenticatio
 
 sealed interface AuthenticationMessage {
 
+    data object ShowAuthenticatingState : AuthenticationMessage
     data object ShowAuthError : AuthenticationMessage
 }
 
@@ -32,6 +33,8 @@ class AuthenticationViewModel @Inject constructor(
     }
 
     fun tryToAuthenticate(activity: FragmentActivity) = viewModelScope.launch {
+        submitMessage(AuthenticationMessage.ShowAuthenticatingState)
+
         if (androidBiometric.canAuthenticateWithFingerprint()) {
             if (androidBiometric.authenticate(activity)) {
                 submitEvent(AuthenticationViewEvent.NavigateToSourceList)

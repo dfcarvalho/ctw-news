@@ -16,6 +16,7 @@ class AuthenticationReducer @Inject constructor() : UdaReducer<AuthenticationVie
 
     override fun apply(currentState: AuthenticationViewState, message: AuthenticationMessage): AuthenticationViewState {
         return when (message) {
+            is AuthenticationMessage.ShowAuthenticatingState -> currentState.copy(authState = AuthState.AUTHENTICATING)
             is AuthenticationMessage.ShowAuthError -> currentState.copy(authState = AuthState.ERROR)
         }
     }
